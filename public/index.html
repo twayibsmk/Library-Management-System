@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Library Management System</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Auth screen (login + register) -->
+  <main id="loginScreen" class="login">
+    <div class="auth-card card">
+      <h1>Library Management System</h1>
+
+      <!-- Tab switcher -->
+      <div class="auth-tabs" role="tablist">
+        <button id="tabLogin"    class="auth-tab active" role="tab" aria-selected="true"  aria-controls="panelLogin">Log In</button>
+        <button id="tabRegister" class="auth-tab"        role="tab" aria-selected="false" aria-controls="panelRegister">Register</button>
+      </div>
+
+      <!-- Login panel -->
+      <div id="panelLogin" role="tabpanel">
+        <form id="loginForm">
+          <p class="muted">Log in as a librarian, faculty, or student.</p>
+          <label>Email <input id="email" type="email" required autocomplete="username"></label>
+          <label>Password <input id="password" type="password" required autocomplete="current-password"></label>
+          <button class="btn" type="submit">Log in</button>
+          <p id="loginError" class="error" hidden></p>
+        </form>
+      </div>
+
+      <!-- Register panel -->
+      <div id="panelRegister" role="tabpanel" hidden>
+        <form id="registerForm">
+          <p class="muted">Create an account. We email you a code to confirm it is really your address. Faculty accounts are also approved by the librarian.</p>
+          <label>Full Name <input id="rName" required autocomplete="name"></label>
+          <label>Email <input id="rEmail" type="email" required autocomplete="email"></label>
+          <label>I am a…
+            <select id="rRole">
+              <option value="student">Student</option>
+              <option value="faculty">Faculty</option>
+            </select>
+          </label>
+          <label><span id="rIdLabel">USN</span> <input id="rMemberId" required maxlength="20" autocomplete="off"></label>
+          <label>Password (8+ characters) <input id="rPassword" type="password" required minlength="8" autocomplete="new-password"></label>
+          <button class="btn" type="submit">Create account</button>
+          <p id="registerError" class="error" hidden></p>
+        </form>
+      </div>
+
+      <!-- Verify panel: shown after registering -->
+      <div id="panelVerify" role="tabpanel" hidden>
+        <form id="verifyForm">
+          <p class="muted" id="verifyInfo">Enter the 6-digit code we emailed you.</p>
+          <label>Verification code <input id="vCode" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" required autocomplete="one-time-code"></label>
+          <button class="btn" type="submit">Verify email</button>
+          <button class="btn ghost" type="button" id="resendCode">Send a new code</button>
+          <p id="verifyError" class="error" hidden></p>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <!-- Main app (shown after login) -->
+  <div id="appScreen" hidden>
+    <header class="top">
+      <div>
+        <strong>Library Management System</strong>
+        <span id="who" class="muted"></span>
+      </div>
+      <button id="logout" class="btn ghost">Log out</button>
+    </header>
+    <nav id="tabs" class="tabs"></nav>
+    <main id="content" class="content"></main>
+  </div>
+
+  <div id="toast" class="toast" hidden></div>
+  <script src="app.js"></script>
+</body>
+</html>
